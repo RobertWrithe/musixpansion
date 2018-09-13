@@ -28,10 +28,7 @@ class App extends Component {
 
   handleKeyPress(event) {
     event.preventDefault();
-    console.log('key pressed');
-    console.log(event.key);
-    if(event.key === 'Enter'){
-      console.log('Enter key pressed');
+    if (event.key === 'Enter') {
       this.searchArtist(this.state.userInput)
     }
   }
@@ -39,7 +36,7 @@ class App extends Component {
   searchArtist(input) {
     var query = input.replace(' ', '+').replace('&', 'and').replace('!', '').replace('?', '');
 
-    Axios.get('http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=' + query + '&api_key=c4f12db3382e08f679bedf5c5e91b891&format=json')
+    Axios.get('https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=' + query + '&api_key=c4f12db3382e08f679bedf5c5e91b891&format=json')
       .then((response) => {
         this.setState({
           artistName: response.data.artist.name,
@@ -67,7 +64,7 @@ class App extends Component {
         })
       });
 
-    var ebayUrl = 'http://svcs.ebay.com/services/search/FindingService/v1';
+    var ebayUrl = 'https://svcs.ebay.com/services/search/FindingService/v1';
     ebayUrl += '?OPERATION-NAME=findItemsByKeywords';
     ebayUrl += '&SERVICE-VERSION=1.0.0';
     ebayUrl += '&SECURITY-APPNAME=RobertBa-ArtistMe-PRD-593587284-6ac41d2e';
@@ -99,16 +96,16 @@ class App extends Component {
         <div id='app-tagline' className='app-tagline'>expand your music collection</div>
         <div className='app-body'>
           <div className='search-bar'>
-              <input
-                type='text'
-                ref={this.myRef}
-                id='userInput'
-                name='userInput'
-                placeholder='Search for musician, band, or any recording artist...'
-                value={this.state.userInput}
-                onChange={this.handleChange}
-                onKeyUp={this.handleKeyPress}
-              />
+            <input
+              type='text'
+              ref={this.myRef}
+              id='userInput'
+              name='userInput'
+              placeholder='Search for musician, band, or any recording artist...'
+              value={this.state.userInput}
+              onChange={this.handleChange}
+              onKeyUp={this.handleKeyPress}
+            />
             <button
               className='search-bar'
               type='submit'
@@ -136,7 +133,7 @@ class App extends Component {
                       <img src={!item.galleryURL ? 'https://ir.ebaystatic.com/pictures/aw/pics/nextGenVit/imgNoImg.gif' : item.galleryURL} alt='eBay Item' height='120'></img>
                     </a>
                     <a href={item.viewItemURL}>
-                    {item.title}
+                      {item.title}
                     </a>
                   </div>
                 )}
