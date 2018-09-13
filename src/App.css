@@ -1,0 +1,181 @@
+.app {
+  text-align: center;
+}
+
+.app-header {
+  background-image: linear-gradient(to bottom right, #e65c00, #ffcc00);
+  padding-top: 3vw;
+  color: black;
+  height: 4.5vw;
+  font-size: 5.5vw;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.app-tagline {
+  color: #ffcc00;
+  font-size: 2vw;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.app-body {
+  color: #ffcc00;
+  font-family: Tahoma, Geneva, sans-serif;
+}
+
+.search-bar {
+  display: inline;
+}
+
+.artist-results {
+  display: grid;
+  justify-items: center;
+}
+
+input[type=text], select {
+  background-color: black;
+  width: 41%;
+  padding: 12px 20px;
+  margin: 8px 0 4px;
+  display: inline-block;
+  border: 1px solid #ffcc00;
+  color: #ffcc00;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button[type=submit] {
+  width: 8%;
+  background-color: #ffcc00;
+  color: black;
+  padding: 13px 5px;
+  margin: 8px 0 4px 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[type=submit]:hover {
+  background-color: #e65c00;
+
+}
+
+.artist-item1 { grid-area: left; }
+.artist-item2 { grid-area: header; }
+.artist-item3 { grid-area: footer; }
+
+.artist-grid-container {
+  display: inline-grid;
+  grid-template-areas: 
+  'left header'
+  'left footer';
+  margin: 4px 0 4px;
+  max-width: 100%;
+  grid-gap: 5px;
+  /* background-color: #2196F3; */
+  padding: 5px;
+  outline: #ffcc00 solid 1px;
+}
+
+.artist-grid-container > div {
+  /* background-color: rgba(255, 255, 255, 0.8); */
+  /* width: 100%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+  font-size: 1vw;
+  /* padding: 0px 0px; */
+}
+
+h1 {
+  font-size: 2.5vw;
+  margin: 0px;
+}
+
+/* p.artist-bio {
+  max-width: 75%;
+} */
+
+a.ebay-titles {
+  max-width: 50%;
+}
+
+.ebay-grid-container {
+  display: inline-grid;
+  /* justify-content: center; */
+  grid-template-columns: auto auto;
+  margin: 4px 0 4px;
+  max-width: 100%;
+  grid-gap: 5px;
+  padding: 5px;
+  outline: #ffcc00 solid 1px;
+}
+
+.ebay-grid-container > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: #ffcc00 solid 1px;
+  max-width: 100%;
+  text-align: center;
+  font-size: 10px;
+}
+
+.ebay-header { 
+  grid-column: 1 / 3;
+  grid-row: 1 / 2;
+}
+
+.ebay-link { grid-column: 1 / 3; }
+
+.ebay-grid-container > .ebay-header {
+  width: 100%;
+  text-align: center;
+  font-size: 1.6vw;
+  outline: #ffcc00 solid 0px;
+}
+
+.ebay-grid-container > .ebay-link {
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+  outline: #ffcc00 solid 0px;
+}
+
+.related-artists {
+  font-size: 1.6vw;
+}
+
+.related-artists > button[type=button] {
+  background-color:  #ffcc00;
+  border-color: #ffcc00;
+  border-width: 0px;
+  border-radius: 4px;
+  color: #000000;
+  padding: 4px 4px 4px;
+  margin: 4px 2px 4px;
+}
+
+.related-artists > button[type=button]:hover {
+  background-color:  #e65c00;
+}
+
+a:link {
+  color: #ffcc00;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #ffcc00;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #e65c00;
+  text-decoration: none;
+}
+
+a:active {
+  color: #ffcc00;
+  text-decoration: none;
+}
