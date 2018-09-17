@@ -6,15 +6,14 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      error: false,
-      artistName: '',
       artistBio: '',
-      artistSimilar: [],
       artistIcon: '',
       artistLink: '',
-      ebayTest: '',
-      ebayResults: [],
+      artistName: '',
+      artistSimilar: [],
       ebayLink: '',
+      ebayResults: [],
+      error: false,
       userInput: ''
     }
     this.handleChange = this.handleChange.bind(this);
@@ -35,59 +34,35 @@ class App extends Component {
 
   searchArtist(input) {
     var query = input.replace(' ', '+').replace('&', 'and').replace('!', '').replace('?', '');
-
-    Axios.get('https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=' + query + '&api_key=c4f12db3382e08f679bedf5c5e91b891&format=json')
+    Axios.get(`/api/${query}`)
       .then((response) => {
         this.setState({
-          artistName: response.data.artist.name,
-          artistBio: response.data.artist.bio.summary.slice(0, response.data.artist.bio.summary.indexOf(' ', 72)) + '...',
-          artistSimilar: response.data.artist.similar.artist,
-          artistIcon: response.data.artist.image[2]['#text'],
-          artistLink: response.data.artist.url,
-          userInput: '',
-          error: false
+          artistBio: response.data.lastfm.artist.bio.summary.slice(0, response.data.lastfm.artist.bio.summary.indexOf(' ', 72)) + '...',
+          artistIcon: response.data.lastfm.artist.image[2]['#text'],
+          artistLink: response.data.lastfm.artist.url,
+          artistName: response.data.lastfm.artist.name,
+          artistSimilar: response.data.lastfm.artist.similar.artist,
+          ebayLink: response.data.ebay.slice(response.data.ebay.lastIndexOf('http'), response.data.ebay.lastIndexOf('"]}]})')).replace(/\\/g, ''),
+          ebayResults: JSON.parse(response.data.ebay.slice(response.data.ebay.indexOf('[{"itemId"'), response.data.ebay.lastIndexOf('}],"paginationOutput"'))),
+          error: false,
+          userInput: ''
         })
       })
       .catch((err) => {
         console.log(err);
         this.setState({
-          error: true,
-          artistName: '',
           artistBio: '',
-          artistSimilar: [],
           artistIcon: '',
           artistLink: '',
-          ebayTest: '',
-          ebayResults: [],
+          artistName: '',
+          artistSimilar: [],
           ebayLink: '',
+          ebayResults: [],
+          error: true,
           userInput: ''
         })
       });
-
-    var ebayUrl = 'https://svcs.ebay.com/services/search/FindingService/v1';
-    ebayUrl += '?OPERATION-NAME=findItemsByKeywords';
-    ebayUrl += '&SERVICE-VERSION=1.0.0';
-    ebayUrl += '&SECURITY-APPNAME=RobertBa-ArtistMe-PRD-593587284-6ac41d2e';
-    ebayUrl += '&GLOBAL-ID=EBAY-US';
-    ebayUrl += '&RESPONSE-DATA-FORMAT=JSON';
-    ebayUrl += '&callback=_cb_findItemsByKeywords';
-    ebayUrl += '&REST-PAYLOAD';
-    ebayUrl += '&keywords=' + query;
-    ebayUrl += '&paginationInput.entriesPerPage=6';
-
-    Axios.get(ebayUrl)
-      .then((response) => {
-        this.setState({
-          ebayTest: response.data.slice(response.data.lastIndexOf('http'), response.data.lastIndexOf('"]}]})')).replace(/\\/g, ''),
-          ebayResults: JSON.parse(response.data.slice(response.data.indexOf('[{"itemId"'), response.data.lastIndexOf('}],"paginationOutput"'))),
-          ebayLink: response.data.slice(response.data.lastIndexOf('http'), response.data.lastIndexOf('"]}]})')).replace(/\\/g, ''),
-          error: false
-        })
-      })
-      .catch((err) => { console.log(err) });
-
   }
-
 
   render() {
     return (
@@ -107,7 +82,6 @@ class App extends Component {
               onKeyUp={this.handleKeyPress}
             />
             <button
-              className='search-bar'
               type='submit'
               id='searchArtist'
               name='searchArtist'
