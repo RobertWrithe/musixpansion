@@ -1,3 +1,5 @@
 const app = require('./app');
 
-app.listen(3000, () => console.info('Express Server running on port 3000')); // Do I need this? In here or 'index.js'?
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => console.info(`Express Server running on port ${PORT}`));
